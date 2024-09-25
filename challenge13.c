@@ -5,34 +5,55 @@ int main(){
 et en hexadécimal. Entrez un nombre entier et affichez ses valeurs 
 équivalentes en binaire et en hexadécimal.*/
 
-int nombre,bin;
-int exa;
-printf("Entrer un nombre entier : ");
-scanf("%d",&nombre);
 //conversion decimal en binaire
-while (nombre != 0)
-{
-  bin = nombre % 2;
-  nombre = nombre / 2;
-  printf("%d",bin);
+  
+    //Demander à l'utilisateur d'entrer un nombre décimal
+    int nombre;
 
-}
+    printf("Entrez un nombre decimal: ");
+    scanf("%d", &nombre);
+    int original_Number = nombre;
+    int binaire[32]; 
+    int i = 0;
+    char hexadecimale[32];
+    int z = 0;
+   // Tableau pour stocker les bits
+    
 
-//conversion decimal en binaire
-   int i = 1, j, s;
-    char hexa_Number[100];
-
-    while (nombre != 0) {
-        s = nombre % 16;
-        if (s < 10)
-            s = s + 48;
-        else
-            s = s + 55;//aski code
-        hexa_Number[i++] = s;
-        nombre = nombre / 16;
+    // Boucle pour extraire les bits
+    while (nombre > 0) {
+        binaire[i] = nombre % 2; // Récupère le bit
+        nombre = nombre / 2;      // Divise par 2
+        i++;
     }
-    printf("Hexadecimal value is: ");
-    for (j = i + 1; j > 0; j++){
-        printf("%c", hexa_Number[j]);
+    printf("\n");
+    printf("Valeur binaire : ");
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d",binaire[j]);
     }
+    printf("\n");
+//conversion decimal ver exadecimal
+
+    // Tableau pour stocker les chiffres hexadécimaux
+
+    // Boucle pour extraire les chiffres hexadécimaux
+    while (original_Number > 0) {
+        int reste = original_Number % 16; // Récupère le reste
+        if (reste < 10) {
+            hexadecimale[z] = reste + '0'; // Convertit en caractère
+        } else {
+            hexadecimale[z] = reste - 10 + 'A'; // A-F pour 10-15
+        }
+        original_Number = original_Number / 16; // Divise par 16
+        z++;
+    }
+
+    // Afficher les chiffres hexadécimaux en ordre inverse
+    printf("Valeur hexadecimale : ");
+    for (int j = z - 1; j >= 0; j--) {
+      printf("%c", hexadecimale[j]);
+    }
+    printf("\n");
+
+    return 0;
 }
